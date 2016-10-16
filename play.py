@@ -9,6 +9,9 @@ import sys
 
 
 '''Load or create the file with statistics, counts.json'''
+# Script location
+s_path = os.path.realpath(__file__)
+os.chdir('/'.join(s_path.split('/')[:-1]))
 
 if not os.path.exists("counts.json"):
     # Read the file list
