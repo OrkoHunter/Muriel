@@ -27,3 +27,4 @@ For example, I'll have the directory stucture like this -
  - Make a symlink of it on your desktop and execute from there.
  - If you always have a terminal open, put an alias to the script file.
 
+<img src="http://cdn2.business2community.com/wp-content/uploads/2014/08/friendship44.gif">
