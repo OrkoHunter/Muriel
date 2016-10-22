@@ -38,17 +38,17 @@ else:
         counts = json.loads(f.read())
 
 
-'''Find out what to watch next'''
+'''Find out what next to watch'''
 
 # Average number of times each episode has been watched
 avg = sum(counts[i] for i in counts.keys()) / len(counts)
 
 # New episode to watch
-new = random.choice(counts.keys())
+new = random.choice(list(counts.keys()))
 
 # Don't watch an overwatched episode
 while counts[new] > avg :
-    new = random.choice(counts.keys())
+    new = random.choice(list(counts.keys()))
 
 # Add the count of the new episode
 counts[new] += 1
@@ -59,9 +59,9 @@ with open('counts.json', 'w') as f:
 '''Play the episode'''
 if sys.platform == 'darwin':
     call(['open', new])
-elif sys.platform == 'linux2':
+elif sys.platform in ['linux', 'linux2']:
     # Can also use xdg-open
-    call(['gnome-open', new])
+    call(['xdg-open', os.path.join(os.path.abspath('.'), new)])
 elif sys.platform in ['win32', 'win64']:
     raise Exception(
         "If you're nerd enough to use this, why still on windows?")
