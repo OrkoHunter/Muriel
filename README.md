@@ -26,6 +26,7 @@ For example, I'll have the directory stucture like this -
 
  - Make a symlink of it on your desktop and execute from there.
  - If you always have a terminal open, put an alias to the script file.
+ - Tip : Add **2>/dev/null** at the end while executing the python script to avoid noise.
 
 ---
 Did you like it? So, is this Friendship, I guess so !<br>
