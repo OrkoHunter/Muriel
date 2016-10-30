@@ -6,28 +6,34 @@ import json
 import os
 import random
 import sys
+if sys.platform in ['win32', 'win64']:
+    import itertools
 
 
 '''Load or create the file with statistics, counts.json'''
 # Script location
 s_path = os.path.realpath(__file__)
-os.chdir('/'.join(s_path.split('/')[:-1]))
+os.chdir(os.path.sep.join(s_path.split(os.path.sep)[:-1]))
 
 if not os.path.exists("counts.json"):
     # Read the file list
-    files = glob('*/*')
-
-    # Remove files of size less than 10 MB (Subtitles, etc.)
-    for vid in list(files):
-        if os.stat(vid).st_size < 10e7:
-            files.remove(vid)
 
     # A dictionary with key as episode and value as number of times watched
     counts = dict()
 
-    # Initialize the dictionary
+    if sys.platform in ['win32', 'win64']:
+        files = list(itertools.chain.from_iterable([glob('*'), glob('*\\*')]))
+    else:
+        files = list(glob('*' + os.path.sep + '*'))
+
+    # Initialize the dict with files > 10MB in size
     for vid in files:
-        counts[vid] = 0
+        # Remove files of size less than 10 MB (Subtitles, etc.)
+        if os.stat(vid).st_size < 10e7:
+            files.remove(vid)
+        else:
+            # Initialize the dictionary
+            counts[vid] = 0
 
     # Initialize counts.json
     with open('counts.json', 'w') as f:
@@ -47,7 +53,7 @@ avg = sum(counts[i] for i in counts.keys()) / len(counts)
 new = random.choice(list(counts.keys()))
 
 # Don't watch an overwatched episode
-while counts[new] > avg :
+while counts[new] > avg:
     new = random.choice(list(counts.keys()))
 
 # Add the count of the new episode
@@ -63,8 +69,11 @@ elif sys.platform in ['linux', 'linux2']:
     # Can also use xdg-open
     call(['xdg-open', os.path.join(os.path.abspath('.'), new)])
 elif sys.platform in ['win32', 'win64']:
-    raise Exception(
-        "If you're nerd enough to use this, why still on windows?")
+    # raise Exception(
+    #    "If you're nerd enough to use this, why still on windows?")
+    # If you're still stuck in your parents basement and don't know it,
+    # some people are stuck with windows... and hate it
+    os.system('cmd /c ' + new)
 else:
     raise Exception("Platform not recognized. Maybe too much nerd for this?")
 
