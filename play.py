@@ -29,7 +29,7 @@ if not os.path.exists("counts.json"):
     # Initialize the dict with files > 10MB in size
     for vid in files:
         # Remove files of size less than 10 MB (Subtitles, etc.)
-        if os.stat(vid).st_size < 10e7:
+        if os.stat(vid).st_size < 10**7:
             files.remove(vid)
         else:
             # Initialize the dictionary
@@ -73,7 +73,7 @@ elif sys.platform in ['win32', 'win64']:
     #    "If you're nerd enough to use this, why still on windows?")
     # If you're still stuck in your parents basement and don't know it,
     # some people are stuck with windows... and hate it
-    os.system('cmd /c ' + new)
+    os.system('cmd /c ' +'"' +new+'"')
 else:
     raise Exception("Platform not recognized. Maybe too much nerd for this?")
 
