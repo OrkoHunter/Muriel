@@ -1,6 +1,7 @@
 body {
 	background: linear-gradient(-60deg, #230816, #230846);
 	font-family: georgia,garamond,serif;
+	overflow-x: hidden;
 }
 
 #addNew {
