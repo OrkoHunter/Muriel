@@ -1,3 +1,8 @@
+const remote = require('electron').remote
+const dialog = remote.dialog
+const fs = require('fs')
+const os = require('os')
+
 // Create a "close" button and append it to each list item
 var myNodelist = document.getElementsByTagName("LI");
 var i;
@@ -21,17 +26,24 @@ for (i = 0; i < close.length; i++) {
   }
 }
 
-function add_button(argument) {
-  var li = document.createElement("li");
-  // var inputValue = document.getElementById("myInput").value;
-  var inputValue = "Hi";
-  var t = document.createTextNode(inputValue);
-  li.appendChild(t);
-  if (inputValue === '') {
-    alert("You must write something!");
-  } else {
-    document.getElementById("list").appendChild(li);
+// Function to choose directory
+function openDirectory () {
+  var options = {
+    'defaultPath': os.homedir(),
+    'properties': ['openDirectory']
   }
+  dialog.showOpenDialog(options, function (fileNames) {
+    add_new(fileNames)
+  });
+}
+
+function add_new(fileNames) {
+  var li = document.createElement("li");
+  var fullPath = fileNames[0];
+  var dirName = fullPath.replace(/^.*[\\\/]/, '');
+  var t = document.createTextNode(dirName);
+  li.appendChild(t);
+  document.getElementById("list").appendChild(li);
 
   var span = document.createElement("SPAN");
   var txt = document.createTextNode("\u00D7");
@@ -46,4 +58,3 @@ function add_button(argument) {
     }
   }
 }
-
