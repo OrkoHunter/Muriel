@@ -3,6 +3,7 @@ const os = require('os')
 const path = require('path')
 const walk = require('walk')
 const hash = require('./hash')
+const utils = require('./utils')
 
 const home = os.homedir()
 const data_dir = path.join(home, '.binge_watcher')
@@ -70,6 +71,7 @@ function add_new_series(new_series, callback) {
 
   walker.on('end', function() {
     // Time to shuffle the array
+    files = utils.shuffle(files)
   })
 
 
