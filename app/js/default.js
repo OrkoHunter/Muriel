@@ -3,10 +3,12 @@ const dialog = remote.dialog
 const fs = require('fs')
 const os = require('os')
 
-const data = require('./dataio')
-const hash = require('./hash')
+// These module are being loaded from the location of index.html
+const data = require('./js/dataio')
+const hash = require('./js/hash.js')
 
-
+//data.save('a', 'b')
+//data.get('a')
 
 // Create a "close" button and append it to each list item
 var myNodelist = document.getElementsByTagName("LI");
@@ -40,6 +42,11 @@ function openDirectory () {
   dialog.showOpenDialog(options, function (fileNames) {
     var fullPath = fileNames[0]
     var dirName = fullPath.replace(/^.*[\\\/]/, '')
+
+    new_series = {}
+    new_series.name = dirName
+    new_series.path = fullPath
+    data.add_new_series(new_series)
     add_new(dirName)
   });
 }
