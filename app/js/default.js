@@ -50,8 +50,6 @@ function openDirectory () {
     new_series.path = fullPath
     data.add_new_series(new_series)
     add_new(name)
-
-
   });
 }
 

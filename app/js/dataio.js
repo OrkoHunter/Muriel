@@ -47,34 +47,49 @@ function reset() {
 }
 
 function add_new_series(new_series, callback) {
-  name = new_series.name
   root_dir = new_series.path
 
   series_id = hash(root_dir)
 
   if (fs.existsSync(path.join(data_dir, series_id + '.json'))) {
-    throw('Series already exists in record!')
+    alert('Series already exists in record!')
+  } else {
+
+    var walker  = walk.walk(root_dir, { followLinks: false });
+    var files = []
+    walker.on('file', function(root_dir, stat, next) {
+      // Add this file to the list of files
+      file = root_dir + '/' + stat.name
+      file_stats = fs.statSync(file)
+      filesize = file_stats.size / 1000000.0
+      // Ignore files with size less than 1 MB. Not the media file we are looking for
+      if (filesize > 1)
+          files.push(file)
+      next()
+    })
+
+    walker.on('end', function() {
+      // Time to shuffle the array
+      files = utils.shuffle(files)
+      // A list of episodes
+      var list_of_episodes = {}
+      for (var i=1; i<=files.length; i++) {
+        list_of_episodes[i] = files[i - 1]
+      }
+
+      // https://github.com/OrkoHunter/binge-watcher/wiki/Storage
+      var series = {}
+      series.name = new_series.name
+      series.root_dir = root_dir
+      series.no_of_episodes = files.length
+      series.list_of_episodes = list_of_episodes
+      series.last_watched_index = 0
+      series.date_added = new Date().toDateString()
+      series.hours_watched = 0
+
+      save(series_id + '.json', series, console.log)
+    })
   }
-
-  var walker  = walk.walk(root_dir, { followLinks: false });
-  var files = []
-  walker.on('file', function(root_dir, stat, next) {
-    // Add this file to the list of files
-    file = root_dir + '/' + stat.name
-    file_stats = fs.statSync(file)
-    filesize = file_stats.size / 1000000.0
-    // Ignore files with size less than 1 MB. Not the media file we are looking for
-    if (filesize > 1)
-        files.push(file)
-    next()
-  })
-
-  walker.on('end', function() {
-    // Time to shuffle the array
-    files = utils.shuffle(files)
-
-  })
-
 
 }
 
