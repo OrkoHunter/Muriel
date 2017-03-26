@@ -103,6 +103,4 @@ function delete_series(id) {
 
 exports.add_new_series = add_new_series
 exports.delete_series = delete_series
-//save('himanshu.json', ['sita', 'ram'])
-//load('himanshu.json', console.log)
 
