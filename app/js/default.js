@@ -73,7 +73,7 @@ function add_new(series) {
   li.setAttribute('date_added', series.date_added)
   li.setAttribute('hours_watched', series.hours_watched)
   li.onclick = function() {
-    show_stats(this.getAttribute('series_id'))
+    play_next(this.getAttribute('series_id'))
   }
   document.getElementById("list").appendChild(li);
 
@@ -84,6 +84,12 @@ function add_new(series) {
   icon.setAttribute('aria-hidden', 'true')
   span.className = "info";
   span.appendChild(icon);
+  span.onclick = function() {
+   show_stats(this.parentElement.getAttribute('series_id'))
+  }
+  span.addEventListener("click", function(e) {
+    e.stopPropagation()
+  })
   li.appendChild(span);
 
   var span = document.createElement("SPAN");
@@ -123,4 +129,8 @@ function show_stats(id) {
       alert(alert_text)
     }
   })
+}
+
+function play_next(id) {
+  alert("Playing next " + id)
 }
