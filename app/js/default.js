@@ -99,11 +99,15 @@ function add_new(series) {
   li.appendChild(span);
 
   for (i = 0; i < close.length; i++) {
+    close[i].addEventListener("click", function(e) {
+      e.stopPropagation()
+    })
+
     close[i].onclick = function() {
       if (confirm("Are you sure to remove? \n\nAll the settings and database will be lost.")) {
         var div = this.parentElement;
         div.style.display = "none";
-        data.delete_series(div.id)
+        data.delete_series(div.getAttribute('series_id'))
       }
     }
   }
