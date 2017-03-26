@@ -68,6 +68,22 @@ ul li:hover {
     margin: 12px 16px 0px 0px
 }
 
+.info {
+    position: absolute;
+    right: 1em;
+    top: 0;
+    size: 0.1px;
+    margin: 12px 16px 0px 0px
+}
+
+.info i {
+	font-size: 0.8em;
+}
+
+.info:hover {
+	color: cyan;
+}
+
 .close:hover {
     color: red;
 }

@@ -1,8 +1,10 @@
-const remote = require('electron').remote
+const electron = require('electron')
+const remote = electron.remote
 const dialog = remote.dialog
 const fs = require('fs')
 const os = require('os')
 const path = require('path')
+
 
 // These module are being loaded from the location of index.html
 const data = require('./js/dataio')
@@ -63,14 +65,26 @@ function add_new(series) {
   var li = document.createElement("li");
   var t = document.createTextNode(series.name);
   li.appendChild(t);
-  li.setAttribute('id', series.id)
+  li.setAttribute('series_id', series.id)
   li.setAttribute('root_dir', series.root_dir)
   li.setAttribute('no_of_episodes', series.no_of_episodes)
   li.setAttribute('list_of_episodes', series.list_of_episodes)
   li.setAttribute('last_watched_index', series.last_watched_index)
   li.setAttribute('date_added', series.date_added)
   li.setAttribute('hours_watched', series.hours_watched)
+  li.onclick = function() {
+    show_stats(this.getAttribute('series_id'))
+  }
   document.getElementById("list").appendChild(li);
+
+  var span = document.createElement("SPAN");
+  var icon = document.createElement("i")
+  icon.classList.add('fa')
+  icon.classList.add('fa-info')
+  icon.setAttribute('aria-hidden', 'true')
+  span.className = "info";
+  span.appendChild(icon);
+  li.appendChild(span);
 
   var span = document.createElement("SPAN");
   var txt = document.createTextNode("\u00D7");
@@ -87,4 +101,26 @@ function add_new(series) {
       }
     }
   }
+}
+
+
+function show_stats(id) {
+  // alert("I'll show you some stats")
+  // can access at window.__args__ from scripts
+  file_path = path.join(data_dir, id + '.json')
+  fs.readFile(file_path, 'utf8', function readFileCallback(err, data) {
+    if (err) {
+      console.log(err)
+    } else {
+      obj = JSON.parse(data)
+      console.log(obj)
+      var alert_text = "\
+      Statistics for " + obj.name + "\n\n\
+      Number of episodes :\t" + obj.no_of_episodes + "\n\
+      Last watched episode : " + obj.list_of_episodes[obj.last_watched_index] + "\n\
+      Date Added : \t" + obj.date_added + "\n\
+      Path : " + obj.root_dir + "\n"
+      alert(alert_text)
+    }
+  })
 }
