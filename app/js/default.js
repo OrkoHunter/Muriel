@@ -62,6 +62,12 @@ function add_new(series) {
   var li = document.createElement("li");
   var t = document.createTextNode(series.name);
   li.appendChild(t);
+  li.setAttribute('root_dir', series.root_dir)
+  li.setAttribute('no_of_episodes', series.no_of_episodes)
+  li.setAttribute('list_of_episodes', series.list_of_episodes)
+  li.setAttribute('last_watched_index', series.last_watched_index)
+  li.setAttribute('date_added', series.date_added)
+  li.setAttribute('hours_watched', series.hours_watched)
   document.getElementById("list").appendChild(li);
 
   var span = document.createElement("SPAN");
