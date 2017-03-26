@@ -24,7 +24,7 @@ for (i = 0; i < close.length; i++) {
   }
 }
 
-// Function to populate list
+// Function to populate list by stored records
 fs.readdir(data_dir, function (err, files) {
   files.forEach(function(file) {
     file_path = path.join(data_dir, file)
@@ -33,7 +33,7 @@ fs.readdir(data_dir, function (err, files) {
         console.log(err)
       } else {
         obj = JSON.parse(data) // now it an object
-        add_new(obj.name)
+        add_new(obj)
       }
     })
   })
@@ -53,15 +53,14 @@ function openDirectory () {
     var name = prompt('Name of the series?', dirName)
     new_series.name = name
     new_series.path = fullPath
-    data.add_new_series(new_series)
-    add_new(name)
+    data.add_new_series(new_series, add_new)
   });
 }
 
 // Add new element to the list
-function add_new(name) {
+function add_new(series) {
   var li = document.createElement("li");
-  var t = document.createTextNode(name);
+  var t = document.createTextNode(series.name);
   li.appendChild(t);
   document.getElementById("list").appendChild(li);
 

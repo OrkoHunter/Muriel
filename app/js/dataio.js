@@ -88,6 +88,8 @@ function add_new_series(new_series, callback) {
       series.hours_watched = 0
 
       save(series_id + '.json', series, console.log)
+
+      callback(series)
     })
   }
 
