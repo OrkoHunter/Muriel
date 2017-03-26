@@ -2,25 +2,15 @@ const remote = require('electron').remote
 const dialog = remote.dialog
 const fs = require('fs')
 const os = require('os')
+const path = require('path')
 
 // These module are being loaded from the location of index.html
 const data = require('./js/dataio')
 const hash = require('./js/hash.js')
 const prompt = require('./js/prompt.js')
 
-//data.save('a', 'b')
-//data.get('a')
-
-// Create a "close" button and append it to each list item
-var myNodelist = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  myNodelist[i].appendChild(span);
-}
+const home = os.homedir()
+const data_dir = path.join(home, '.binge_watcher')
 
 // Click on a close button to hide the current list item
 var close = document.getElementsByClassName("close");
@@ -33,6 +23,21 @@ for (i = 0; i < close.length; i++) {
     }
   }
 }
+
+// Function to populate list
+fs.readdir(data_dir, function (err, files) {
+  files.forEach(function(file) {
+    file_path = path.join(data_dir, file)
+    fs.readFile(file_path, 'utf8', function readFileCallback(err, data) {
+      if (err) {
+        console.log(err)
+      } else {
+        obj = JSON.parse(data) // now it an object
+        add_new(obj.name)
+      }
+    })
+  })
+})
 
 // Function to choose directory
 function openDirectory () {
