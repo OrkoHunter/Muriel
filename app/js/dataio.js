@@ -72,6 +72,7 @@ function add_new_series(new_series, callback) {
   walker.on('end', function() {
     // Time to shuffle the array
     files = utils.shuffle(files)
+
   })
 
 

@@ -6,6 +6,7 @@ const os = require('os')
 // These module are being loaded from the location of index.html
 const data = require('./js/dataio')
 const hash = require('./js/hash.js')
+const prompt = require('./js/prompt.js')
 
 //data.save('a', 'b')
 //data.get('a')
@@ -44,10 +45,13 @@ function openDirectory () {
     var dirName = fullPath.replace(/^.*[\\\/]/, '')
 
     new_series = {}
-    new_series.name = dirName
+    var name = prompt('Name of the series?', dirName)
+    new_series.name = name
     new_series.path = fullPath
     data.add_new_series(new_series)
-    add_new(dirName)
+    add_new(name)
+
+
   });
 }
 

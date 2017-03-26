@@ -9,6 +9,8 @@ const url = require('url')
 
 const open = require('open')
 
+const ipcMain = electron.ipcMain
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -25,6 +27,7 @@ function createWindow () {
     width: 550,
     height: 400,
     resizable: false,
+    preload: __dirname + '/js/prompt.js'
   })
 
   // and load the index.html of the app.
@@ -46,6 +49,40 @@ function createWindow () {
     event.preventDefault();
     open(url);
   });
+
+  // Credits : https://github.com/electron/electron-quick-start/compare/master...konsumer:master
+  var promptResponse
+  ipcMain.on('prompt', function(eventRet, arg) {
+    promptResponse = null
+    var promptWindow = new BrowserWindow({
+      width: 200,
+      height: 100,
+      show: false,
+      resizable: false,
+      movable: false,
+      alwaysOnTop: true,
+      frame: false
+    })
+    arg.val = arg.val || ''
+    const promptHtml = '<label for="val">' + arg.title + '</label>\
+    <input id="val" value="' + arg.val + '" autofocus />\
+    <button id="ok-button" onclick="require(\'electron\').ipcRenderer.send(\'prompt-response\', document.getElementById(\'val\').value);window.close()">Ok</button>\
+    <style>body {font-family: sans-serif;} button {float:right; margin-left: 10px;} label,input {margin-bottom: 10px; width: 100%; display:block;}</style>\
+    <script>document.getElementById(\'val\').addEventListener(\'keydown\', function(e){if(e.which==13)(document.getElementById(\'ok-button\').click())})</script>'
+    promptWindow.loadURL('data:text/html,' + promptHtml)
+    promptWindow.show()
+    promptWindow.on('closed', function() {
+      eventRet.returnValue = promptResponse
+      promptWindow = null
+    })
+  })
+  ipcMain.on('prompt-response', function(event, arg) {
+    if (arg === ''){ arg = null }
+    promptResponse = arg
+  })
+
+
+
 }
 
 // This method will be called when Electron has finished
@@ -72,3 +109,4 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
