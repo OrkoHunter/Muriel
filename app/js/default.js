@@ -18,8 +18,9 @@ var i;
 for (i = 0; i < close.length; i++) {
   close[i].onclick = function() {
     if (confirm("Are you sure to remove? \n\nAll the settings and database will be lost.")) {
-      var div = this.parentElement;
-      div.style.display = "none";
+      // var div = this.parentElement;
+      // div.style.display = "none";
+      data.delete_series(div.id)
     }
   }
 }
@@ -62,6 +63,7 @@ function add_new(series) {
   var li = document.createElement("li");
   var t = document.createTextNode(series.name);
   li.appendChild(t);
+  li.setAttribute('id', series.id)
   li.setAttribute('root_dir', series.root_dir)
   li.setAttribute('no_of_episodes', series.no_of_episodes)
   li.setAttribute('list_of_episodes', series.list_of_episodes)
@@ -78,8 +80,11 @@ function add_new(series) {
 
   for (i = 0; i < close.length; i++) {
     close[i].onclick = function() {
-      var div = this.parentElement;
-      div.style.display = "none";
+      if (confirm("Are you sure to remove? \n\nAll the settings and database will be lost.")) {
+        var div = this.parentElement;
+        div.style.display = "none";
+        data.delete_series(div.id)
+      }
     }
   }
 }

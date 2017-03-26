@@ -80,6 +80,7 @@ function add_new_series(new_series, callback) {
       // https://github.com/OrkoHunter/binge-watcher/wiki/Storage
       var series = {}
       series.name = new_series.name
+      series.id = series_id
       series.root_dir = root_dir
       series.no_of_episodes = files.length
       series.list_of_episodes = list_of_episodes
@@ -95,7 +96,13 @@ function add_new_series(new_series, callback) {
 
 }
 
+
+function delete_series(id) {
+  fs.unlink(path.join(data_dir, id + '.json'), console.log)
+}
+
 exports.add_new_series = add_new_series
+exports.delete_series = delete_series
 //save('himanshu.json', ['sita', 'ram'])
 //load('himanshu.json', console.log)
 
