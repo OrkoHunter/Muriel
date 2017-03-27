@@ -2,7 +2,7 @@ const fs = require('fs')
 const os = require('os')
 const path = require('path')
 const walk = require('walk')
-const exec = require('child_process').exec;
+//const exec = require('child_process').exec;
 const hash = require('./hash')
 const utils = require('./utils')
 
@@ -137,6 +137,7 @@ function play_file(loc) {
   }
 }
 
+/*
 function exec_shell(cmd) {
   var child = exec(cmd, function(error, stdout, stderr) {
     console.log('stdout: ' + stdout);
@@ -146,7 +147,7 @@ function exec_shell(cmd) {
     }
   })
 }
-
+(/)
 exports.add_new_series = add_new_series
 exports.delete_series = delete_series
 exports.play_next = play_next

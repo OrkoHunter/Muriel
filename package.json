@@ -32,13 +32,7 @@
     "electronVersion": "1.6.2",
     "mac": {
       "category": "public.app-category.entertainment",
-      "icon": "app/img/bing.icns"
-    },
-    "win": {
-      "icon": "app/img/bing.ico"
-    },
-    "linux": {
-      "icon": "app/img/bing.png"
+      "icon": "app/img/icons/bing.icns"
     }
   }
 }
