@@ -121,6 +121,8 @@ function play_file(loc) {
   var platform = os.platform()
   // Escape characters
   loc = loc.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&")
+  loc = loc.replace("\'", "\\'")
+  loc = loc.replace('\"', '\\"')
   if (platform == 'darwin') {
     console.log('Its macos')
     exec_shell('open ' + loc)
