@@ -71,9 +71,8 @@ function add_new(series) {
   li.setAttribute('list_of_episodes', series.list_of_episodes)
   li.setAttribute('last_watched_index', series.last_watched_index)
   li.setAttribute('date_added', series.date_added)
-  li.setAttribute('hours_watched', series.hours_watched)
   li.onclick = function() {
-    play_next(this.getAttribute('series_id'))
+    data.play_next(this.getAttribute('series_id'))
   }
   document.getElementById("list").appendChild(li);
 
@@ -135,6 +134,3 @@ function show_stats(id) {
   })
 }
 
-function play_next(id) {
-  alert("Playing next " + id)
-}
