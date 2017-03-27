@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 
+'''
+This is the first version of Muriel, a stand alone script.
+See https://github.com/OrkoHunter/Muriel/blob/master/legacy.md
+
+Use this if you aren't GUI-friendly or love Python way too much.
+'''
+
 from glob import glob
 from subprocess import call
 import json

@@ -9,7 +9,7 @@ I have been watching the TV Series called <a href="http://www.thetoptens.com/sit
 So, from now on, I use this little python script which lets helps me distribute my times equally on the entire series.
 
 # How to use
-Put the script 'play.py' in the root directory of the series to watch.
+Put the script [play.py](https://github.com/OrkoHunter/Muriel/blob/master/legacy.py) in the root directory of the series to watch.
 
 For example, I'll have the directory stucture like this -
 
