@@ -1,8 +1,32 @@
-body {
-	background: linear-gradient(-60deg, #230816, #230846);
-	font-family: georgia,garamond,serif;
-	overflow-x: hidden;
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
+
+body {
+  /* Disable text selection, or your app will feel like a web page */
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+
+  /* Cover the whole window */
+  height: 100%;
+
+  /* Make sure this matches the native window background color that you pass to
+   * electron.BrowserWindow({...}), otherwise your app startup will look janky. */
+  background: linear-gradient(-60deg, #230816, #230846);
+
+  /* Smoother startup */
+  animation: fadein 0.5s;
+
+  overflow-x: hidden;
+
+  font-family: georgia,garamond,serif;
+}
+
 
 #addNew {
 	width: 100%;

@@ -27,7 +27,8 @@ function createWindow () {
     width: 550,
     height: 400,
     resizable: false,
-    preload: __dirname + '/js/prompt.js'
+    preload: __dirname + '/js/prompt.js',
+    backgroundColor: '#230836'
   })
 
   // and load the index.html of the app.
