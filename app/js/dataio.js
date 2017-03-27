@@ -7,7 +7,7 @@ const hash = require('./hash')
 const utils = require('./utils')
 
 const home = os.homedir()
-const data_dir = path.join(home, '.binge_watcher')
+const data_dir = path.join(home, '.muriel')
 
 // Create storage directory if not present
 if (!fs.existsSync(data_dir)){
@@ -78,7 +78,7 @@ function add_new_series(new_series, callback) {
         list_of_episodes[i] = files[i - 1]
       }
 
-      // https://github.com/OrkoHunter/binge-watcher/wiki/Storage
+      // https://github.com/OrkoHunter/Muriel/wiki/Storage
       var series = {}
       series.name = new_series.name
       series.id = series_id

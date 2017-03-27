@@ -12,7 +12,7 @@ const hash = require('./js/hash.js')
 const prompt = require('./js/prompt.js')
 
 const home = os.homedir()
-const data_dir = path.join(home, '.binge_watcher')
+const data_dir = path.join(home, '.muriel')
 
 // Click on a close button to hide the current list item
 var close = document.getElementsByClassName("close");
