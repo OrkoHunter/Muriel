@@ -33,7 +33,7 @@ function createWindow () {
     preload: __dirname + '/js/prompt.js',
     backgroundColor: '#230836'
   })
-
+  mainWindow.setTitle(require('./package.json').name)
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'app/index.html'),
