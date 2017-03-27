@@ -1,10 +1,18 @@
 {
   "name": "Muriel",
   "version": "1.0.0",
+  "description": "A cross-platform app to binge-watch anything, without being bored",
+  "homepage": "https://github.com/OrkoHunter/Muriel",
+  "author": "Himanshu Mishra (@OrkoHunter)",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/documentcloud/underscore.git"
+  },
+  "license": "MIT",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "package": "electron-packager ./ Muriel --all --out ~/Desktop/Muriel --version 1.0.0 --overwrite --icon=./app/img/app-icon.icns"
+    "package": "electron-packager ./ Muriel --all --out ~/Desktop/Muriel --electron-version 1.0.0 --overwrite --icon=./app/img/bing.ico"
   },
   "devDependencies": {
     "electron": "^1.6.2",
