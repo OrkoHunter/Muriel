@@ -44,6 +44,9 @@ fs.readdir(data_dir, function (err, files) {
 
 // Function to choose directory
 function openDirectory () {
+  document.getElementById("add-btn-i").classList.remove('fa-plus')
+  document.getElementById("add-btn-i").classList.add('fa-spinner')
+  document.getElementById("add-btn-i").classList.add('fa-spin')
   var options = {
     'defaultPath': os.homedir(),
     'properties': ['openDirectory']
@@ -57,6 +60,9 @@ function openDirectory () {
     new_series.name = name
     new_series.path = fullPath
     data.add_new_series(new_series, add_new)
+    document.getElementById("add-btn-i").classList.add('fa-plus')
+    document.getElementById("add-btn-i").classList.remove('fa-spinner')
+    document.getElementById("add-btn-i").classList.remove('fa-spin')
   });
 }
 
